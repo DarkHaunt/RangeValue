@@ -1,0 +1,17 @@
+{
+  "name": "com.darkhaunt.range-value",
+  "displayName": "Range Value",
+  "description": "Data type that can easy handle range in Unity inspector",
+  "version": "1.0.1",
+  "unity": "2020.3",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "samples": [
+    {
+      "displayName": "Example Scene",
+      "description": "API abilities demonstration",
+      "path": "Sample"
+    }
+  ]
+}
