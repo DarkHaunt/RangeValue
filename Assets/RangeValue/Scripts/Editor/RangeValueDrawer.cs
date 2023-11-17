@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Globalization;
 using UnityEditor;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace UnityRangeValue.Editor
         {
             if (property.serializedObject.isEditingMultipleObjects)
                 return;
-            
+
             // Data Get
 
             EditorGUI.BeginChangeCheck();
@@ -29,9 +30,9 @@ namespace UnityRangeValue.Editor
 
             var currentMinField = property.FindPropertyRelative(GetSerializedProperty(nameof(RangeValue.Min)));
             var currentMaxField = property.FindPropertyRelative(GetSerializedProperty(nameof(RangeValue.Max)));
-            
+
             // Values Get & Content Drawing 
-            
+
             var minVal = EditorGUI.FloatField(contentRect.minField, minField.floatValue);
             var maxVal = EditorGUI.FloatField(contentRect.maxField, maxField.floatValue);
 
@@ -40,23 +41,17 @@ namespace UnityRangeValue.Editor
 
             EditorGUI.MinMaxSlider(contentRect.slider, ref currentMinVal, ref currentMaxVal,
                 minVal, maxVal);
-            
+
             // Validation
 
             if (minVal > maxVal)
                 minVal = maxVal;
 
-            if (currentMaxVal > maxVal)
-                currentMaxVal = maxVal;
+            currentMinVal = Mathf.Clamp(currentMinVal, minVal, maxVal);
+            currentMaxVal = Mathf.Clamp(currentMaxVal, minVal, maxVal);
 
-            if (currentMinVal < minVal)
-                currentMinVal = minVal;
-            
-            if (currentMinVal > currentMaxVal)
-                currentMinVal = currentMaxVal;
-            
             // Results
-            
+
             var formattedRange = string.Format(CultureInfo.InvariantCulture, "[{0:0.00} : {1:0.00}]", currentMinVal,
                 currentMaxVal);
 
@@ -111,3 +106,4 @@ namespace UnityRangeValue.Editor
         }
     }
 }
+#endif
