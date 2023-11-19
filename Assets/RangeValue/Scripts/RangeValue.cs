@@ -18,7 +18,7 @@ namespace UnityRangeValue
         maxLimitEditor = max;
 #endif
             if (min > max)
-                throw new ArgumentException($"{nameof(RangeValue)} can't have min value bugger than max!\n{min} > {max}");
+                throw new ArgumentException($"{nameof(RangeValue)} can't have min value bigger than max!\n{min} > {max}");
         
             Min = min;
             Max = max;
